@@ -1,0 +1,21 @@
+---
+- name: Create '{{ dir_bin }}' directory
+  file:
+    path: "{{ dir_bin }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0750
+
+- name: Install package 'unzip'
+  package:
+    name: unzip
+    state: present
+
+- name: Unarchive '{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip' to '{{ dir_bin }}'
+  unarchive:
+    src: "{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip"
+    dest: "{{ dir_bin }}"
+    remote_src: yes
+    owner: "{{ username }}"
+    group: "{{ groupname }}"

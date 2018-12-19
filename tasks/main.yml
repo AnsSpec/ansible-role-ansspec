@@ -1,0 +1,14 @@
+---
+- import_tasks: requirements.yml
+
+- import_tasks: user_group.yml
+  tags:
+    - user_group
+
+- import_tasks: download.yml
+  tags:
+    - download
+
+- import_tasks: install.yml
+  tags:
+    - install

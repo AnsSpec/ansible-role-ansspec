@@ -1,0 +1,11 @@
+---
+- name: Create group '{{ groupname }}'
+  group:
+    name: "{{ groupname }}"
+    system: yes
+
+- name: Create user '{{ username }}'
+  user:
+    name: "{{ username }}"
+    groups:
+      - "{{ groupname }}"

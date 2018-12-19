@@ -1,0 +1,14 @@
+---
+- name: Create tmp diretory '{{ dir_tmp }}'
+  file:
+    path: "{{ dir_tmp }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0750
+
+- name: Download {{ software.name }} {{ software.version}} from {{ url_download }}
+  get_url:
+    url: "{{ url_download }}"
+    dest: "{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip"
+    validate_certs: no
