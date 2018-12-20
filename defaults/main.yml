@@ -7,3 +7,4 @@ dir_tmp: /tmp/{{ software.name }}
 
 username: "{{ software.name }}"
 groupname: "{{ software.name }}"
+servicename: "{{ software.name }}"
