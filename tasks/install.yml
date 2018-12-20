@@ -11,11 +11,27 @@
   package:
     name: unzip
     state: present
+  when:
+    - file_download is match(".+\.zip")
 
-- name: Unarchive '{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip' to '{{ dir_bin }}'
+- name: Unarchive '{{ dir_tmp }}/{{ file_download }}' to '{{ dir_bin }}'
   unarchive:
-    src: "{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip"
+    src: "{{ dir_tmp }}/{{ file_download }}"
     dest: "{{ dir_bin }}"
     remote_src: yes
     owner: "{{ username }}"
     group: "{{ groupname }}"
+    mode: 0750
+  when:
+    - file_download is match(".+\.zip")
+
+- name: Copy '{{ file_download }}' to '{{ dir_bin }}'
+  copy:
+    src: "{{ dir_tmp }}/{{ file_download }}"
+    dest: "{{ dir_bin }}"
+    remote_src: yes
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0750
+  when:
+    - file_download is not match(".+\.zip")

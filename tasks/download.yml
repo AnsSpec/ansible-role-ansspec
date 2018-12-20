@@ -10,5 +10,5 @@
 - name: Download {{ software.name }} {{ software.version}} from {{ url_download }}
   get_url:
     url: "{{ url_download }}"
-    dest: "{{ dir_tmp }}/{{ software.name }}-{{ software.version}}.zip"
+    dest: "{{ dir_tmp }}/{{ file_download }}"
     validate_certs: no

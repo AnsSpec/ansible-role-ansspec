@@ -1,6 +1,8 @@
 ---
 - import_tasks: requirements.yml
-
+  tags:
+    - requirements
+    
 - import_tasks: user_group.yml
   tags:
     - user_group
