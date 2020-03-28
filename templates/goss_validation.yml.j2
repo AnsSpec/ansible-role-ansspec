@@ -1,0 +1,22 @@
+---
+  file:
+    /usr/bin/{{ software.name }}:
+      exists: true
+      mode: "0755"
+      owner: {{ username }}
+      group: {{ groupname }}
+      filetype: symlink
+      linked-to: /opt/{{ software.name }}-{{ software.version }}/bin/{{ software.name }}
+
+  user:
+    {{ username }}:
+      exists: true
+      groups:
+      - users
+      - {{ groupname }}
+      home: /home/{{ software.name }}
+      shell: /bin/bash
+
+  group:
+    {{ groupname }}:
+      exists: true

@@ -1,0 +1,8 @@
+---
+- name: Template goss_validation.yml.j2 to /tmp
+  template:
+    src: goss_validation.yml.j2
+    dest: /tmp/goss_validation.yml
+
+- name: Launch goss validation with '/tmp/goss_validation.yml'
+  command: /usr/bin/goss --gossfile /tmp/goss_validation.yml
