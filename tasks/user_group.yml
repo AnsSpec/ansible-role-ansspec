@@ -3,9 +3,12 @@
   group:
     name: "{{ groupname }}"
     system: yes
+  become: yes
 
-- name: Create user '{{ username }}'
+- name: "Create user '{{ username }}'' (with shell: {{ shell | default('/usr/bin/false') }})"
   user:
     name: "{{ username }}"
+    shell: "{{ shell | default('/usr/bin/false') }}"
     groups:
       - "{{ groupname }}"
+  become: yes

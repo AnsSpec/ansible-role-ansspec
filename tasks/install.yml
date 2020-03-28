@@ -1,11 +1,11 @@
 ---
-- name: Create '{{ dir_bin }}' directory
+- name: Create '{{ software_bin_dir }}' directory
   file:
-    path: "{{ dir_bin }}"
+    path: "{{ software_bin_dir }}"
     state: directory
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: 0750
+    mode: 0755
 
 - name: Install package 'unzip'
   package:
@@ -14,10 +14,10 @@
   when:
     - file_download is match(".+\.zip")
 
-- name: Unarchive '{{ dir_tmp }}/{{ file_download }}' to '{{ dir_bin }}'
+- name: Unarchive '{{ software_tmp_dir }}/{{ file_download }}' to '{{ software_bin_dir }}'
   unarchive:
-    src: "{{ dir_tmp }}/{{ file_download }}"
-    dest: "{{ dir_bin }}"
+    src: "{{ software_tmp_dir }}/{{ file_download }}"
+    dest: "{{ software_bin_dir }}"
     remote_src: yes
     owner: "{{ username }}"
     group: "{{ groupname }}"
@@ -25,13 +25,20 @@
   when:
     - file_download is match(".+\.zip")
 
-- name: Copy '{{ file_download }}' to '{{ dir_bin }}'
+- name: Copy '{{ software_tmp_dir }}/{{ file_download }}' to '{{ software_bin_dir }}/{{ software.name }}'
   copy:
-    src: "{{ dir_tmp }}/{{ file_download }}"
-    dest: "{{ dir_bin }}"
+    src: "{{ software_tmp_dir }}/{{ file_download }}"
+    dest: "{{ software_bin_dir }}/{{ software.name }}"
     remote_src: yes
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: 0750
+    mode: 0755
   when:
     - file_download is not match(".+\.zip")
+
+- name:
+  file:
+    src: "{{ software_bin_dir }}/{{ software.name }}"
+    dest: "/usr/bin/{{ software.name }}"
+    state: link
+    mode: 0755

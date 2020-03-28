@@ -1,9 +1,10 @@
 ---
-dir_bin: "/opt/{{ software.name }}/bin"
-dir_conf: "/opt/{{ software.name }}/conf"
-dir_data: "/data/{{ software.name }}"
-dir_log: "/var/log/{{ software.name }}"
-dir_tmp: "/tmp/{{ software.name }}"
+software_dir: "/opt/{{ software.name }}-{{ software.version }}"
+software_bin_dir: "{{ software_dir }}/bin"
+software_conf_dir: "{{ software_dir }}/conf"
+
+software_log_dir: "/var/log/{{ software.name }}-{{ software.version }}"
+software_tmp_dir: "/tmp/{{ software.name }}-{{ software.version }}"
 
 username: "{{ software.name }}"
 groupname: "{{ software.name }}"

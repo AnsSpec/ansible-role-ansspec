@@ -1,8 +1,8 @@
 ---
-- name: Install Python (with apt)
-  raw: apt-get update && apt-get install -y python
-  ignore_errors: yes
+# - name: Install Python (with apt)
+#   raw: apt-get update && apt-get install -y python
+#   ignore_errors: yes
 
-- name: Install Python (with yum)
-  raw: yum update && yum install -y python
-  ignore_errors: yes
+# - name: Install Python (with yum)
+#   raw: yum update && yum install -y python
+#   ignore_errors: yes
